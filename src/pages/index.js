@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 
@@ -49,6 +51,11 @@ const MainContainer = styled.main`
  */
 
 const Home = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   return (
     <>
       <Head>
@@ -58,9 +65,11 @@ const Home = () => {
         <meta charSet="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContainer>
-        <FairWidget />
-      </MainContainer>
+      {isMounted && (
+        <MainContainer>
+          <FairWidget />
+        </MainContainer>
+      )}
     </>
   );
 };
